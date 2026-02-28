@@ -1,20 +1,38 @@
 #WordIndex.py
-#Name:
-#Date:
-#Assignment:
+#Name: Zane Serhan
+#Date: 2/28/2026
+#Assignment: Lab6 WordIndex
 
 def main():
-  textFile = open("fish.txt", 'r')
-  
-  words = {} #create an empty dictionary
-  
-  
-  print ("fish" in words) #is a word already in the dictionary?
-  words["fish"] = [2]     #add a list to the dictionary
-  print ("fish" in words) #is the word there now?
-  words["fish"].append(5) #add to an existing list
-  print(words)
+  while True:
 
+    filename = input("Enter filename (gettysberg.txt or fish.txt): ")
+    if filename == "gettysberg.txt" or filename == "fish.txt":
+      textFile = open(filename, 'r')
+  
+      words = {} #create an empty dictionary
+      lineNum = 0
+      for line in textFile:
+        lineNum = lineNum + 1
+        wordList = line.split()
+        for w in wordList:
+          w = w.lower()
+          w = w.replace("," , "")
+          w = w.replace("." , "")
+          w = w.replace("!" , "")
+          if w in words:
+            if lineNum not in words[w]:
+              words[w].append(lineNum)
+          else:
+            words[w] = [lineNum]
+
+      for word in words:
+        print(word, words[word])
+
+      break
+    else:
+      print("Error: Invalid filename. Please try again with gettysberg.txt or fish.txt.")
+ 
 
 if __name__ == '__main__':
   main()
